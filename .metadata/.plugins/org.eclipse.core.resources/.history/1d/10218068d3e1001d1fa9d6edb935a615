@@ -1,0 +1,11 @@
+package org.example.utils;
+
+
+@SuppressWarnings("serial")
+public class BookListNullException extends Exception {
+	
+	public BookListNullException(String msg){
+		super(msg);
+	}
+
+}

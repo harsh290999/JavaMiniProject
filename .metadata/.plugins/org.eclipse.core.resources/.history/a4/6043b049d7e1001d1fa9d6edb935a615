@@ -1,0 +1,90 @@
+
+package org.example.domain;
+
+import java.util.Objects;
+
+public class Book implements Comparable<Pet>{
+	private int bookid;
+	private String name;
+	private String publisherName;
+	private String authorName;
+	private float price;
+	
+	public Book() {	}
+	public Book(int bookid, String name, String publisherName, String authorName, float price) {
+		this.bookid = bookid;
+		this.name = name;
+		this.publisherName = publisherName;
+		this.authorName = authorName;
+		this.price = price;
+	}
+	public int getBookid() {
+		return bookid;
+	}
+	public void setBookid(int bookid) {
+		this.bookid = bookid;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getPublisherName() {
+		return publisherName;
+	}
+	public void setPublisherName(String publisherName) {
+		this.publisherName = publisherName;
+	}
+	public String getAuthorName() {
+		return authorName;
+	}
+	public void setAuthorName(String authorName) {
+		this.authorName = authorName;
+	}
+	public float getPrice() {
+		return price;
+	}
+	public void setPrice(float price) {
+		this.price = price;
+	}
+	@Override
+	public String toString() {
+		return String.format("%-10d%-30s%-20s%-20s%-10.2f",this.bookid,this.name,this.authorName,this.publisherName,this.price);
+	}
+	@Override
+	public int compareTo(Pet o) {
+			return this.bookid-o.bookid;
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(bookid);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pet other = (Pet) obj;
+		return bookid == other.bookid;
+	}
+	
+//	@Override
+//	public boolean equals(Object obj) {
+//		// TODO Auto-generated method stub
+//		return super.equals(obj);
+//	}
+//	@Override
+//	public boolean equals(Object obj) {
+//		if( obj != null ) {
+//			Book other = (Book) obj;
+//			if( this.bookid == other.bookid )
+//				return true;
+//		}
+//		return false;
+//	}
+	
+}

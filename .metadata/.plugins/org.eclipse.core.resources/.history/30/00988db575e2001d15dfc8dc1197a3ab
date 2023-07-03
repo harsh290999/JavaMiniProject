@@ -1,0 +1,78 @@
+package org.example.test;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+import org.example.domain.Pet;
+import org.example.utils.PetListNullException;
+
+public class PetTest {
+	List<Pet> petlist;
+	private double revenue;
+	
+	public void setPetList(ArrayList<Pet> pet) {
+		if(pet!=null)
+			this.petlist=pet;
+	}
+
+	public void printPets(Comparator<Pet> comparator) {
+		if(this.petlist!=null) {
+			this.petlist.sort(comparator);
+			this.petlist.forEach(System.out::println);
+//			while( booklist.iterator().hasNext()) 
+//				System.out.println(booklist.iterator().toString());
+			
+		}
+	}
+
+	public void addPets(Pet[] pet) {
+//		petlist=new ArrayList<>();
+		if(this.petlist!=null) {
+			if(pet!=null) {
+				for(int i=0;i<pet.length;i++)
+					this.petlist.add(pet[i]);
+			}
+			
+		}
+	}
+
+	public Pet findPet(int b) throws PetListNullException {
+	if(this.petlist==null)
+		throw new PetListNullException("PetList is null");
+//		if (this.petlist != null)
+		{
+			Pet key=new Pet();
+			key.setPetId(b);
+				if(this.petlist.contains(key)) {
+					int index=this.petlist.indexOf(key);
+					Pet pet=this.petlist.get(index);
+					return pet;
+			}
+		}
+		return null;
+	}
+
+	public boolean removePet(int i) {
+		if (this.petlist != null) {
+			Pet key=new Pet();
+			key.setPetId(i);
+				if(this.petlist.contains(key)) {
+					int index=this.petlist.indexOf(key);
+					this.petlist.remove(index);
+					return true;
+			}
+		}
+		return false;
+	}
+	
+	public void getRevenue() {
+		if(this.petlist != null) {
+			for(Pet pet:this.petlist) {
+				this.revenue += pet.getPrice();
+			}
+			System.out.println("Total revenue : "+revenue);
+		}
+	}
+}
+

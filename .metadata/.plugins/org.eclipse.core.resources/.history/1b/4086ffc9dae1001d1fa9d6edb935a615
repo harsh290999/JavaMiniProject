@@ -1,0 +1,5 @@
+package org.example.domain;
+
+public enum Sort {
+	BY_ID, BY_NAME, BY_AUTHER, BY_PRICE, BY_PUBLISHER, EXIT;
+}

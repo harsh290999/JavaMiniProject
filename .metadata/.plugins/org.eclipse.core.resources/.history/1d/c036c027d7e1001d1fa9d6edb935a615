@@ -1,0 +1,6 @@
+package org.example.domain;
+
+public enum ArrayListOp {
+	ADD_BOOKS, FIND_BOOK, REMOVE_BOOK, SORT, EXIT;
+}
+

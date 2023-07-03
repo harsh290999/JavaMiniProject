@@ -1,0 +1,98 @@
+
+package org.example.domain;
+
+import java.util.Objects;
+
+public class Pet implements Comparable<Pet>{
+	private String species;
+	private String breed;
+	private String gender;
+	private int age;
+	private int petid;
+	private float price;
+	
+	public Pet() {	}
+	public Pet(String species, String breed, String gender,int age, int petid, float price) {
+		this.species = species;
+		this.breed = breed;
+		this.gender = gender;
+		this.age = age;
+		this.petid = petid;
+		this.price = price;
+	}
+	public int getpetid() {
+		return petid;
+	}
+	public void setpetid(int petid) {
+		this.petid = petid;
+	}
+	public int getage() {
+		return age;
+	}
+	public void setage(int age) {
+		this.age = age;
+	}
+	public String getspecies() {
+		return species;
+	}
+	public void setspecies(String species) {
+		this.species = species;
+	}
+	public String getbreed() {
+		return breed;
+	}
+	public void setbreed(String breed) {
+		this.breed = breed;
+	}
+	public String getgender() {
+		return gender;
+	}
+	public void setgender(String gender) {
+		this.gender = gender;
+	}
+	public float getPrice() {
+		return price;
+	}
+	public void setPrice(float price) {
+		this.price = price;
+	}
+	@Override
+	public String toString() {
+		return String.format("%-15s%-20d%-15s%-10d%-10%years-10.2f",this.species,this.breed,this.gender,this.age,this.petid,this.price);
+	}
+	@Override
+	public float compareTo(Pet o) {
+			return this.price-o.price;
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(price);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pet other = (Pet) obj;
+		return price == other.price;
+	}
+	
+//	@Override
+//	public boolean equals(Object obj) {
+//		// TODO Auto-generated method stub
+//		return super.equals(obj);
+//	}
+//	@Override
+//	public boolean equals(Object obj) {
+//		if( obj != null ) {
+//			Book other = (Book) obj;
+//			if( this.petid == other.petid )
+//				return true;
+//		}
+//		return false;
+//	}
+	
+}

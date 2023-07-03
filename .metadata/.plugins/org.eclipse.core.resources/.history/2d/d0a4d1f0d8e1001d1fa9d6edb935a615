@@ -1,0 +1,90 @@
+
+package org.example.domain;
+
+import java.util.Objects;
+
+public class Pet implements Comparable<Pet>{
+	private int petid;
+	private String name;
+	private String breed;
+	private String gender;
+	private float price;
+	
+	public Pet() {	}
+	public Pet(int petid, String name, String breed, String gender, float price) {
+		this.petid = petid;
+		this.name = name;
+		this.breed = breed;
+		this.gender = gender;
+		this.price = price;
+	}
+	public int getpetid() {
+		return petid;
+	}
+	public void setpetid(int petid) {
+		this.petid = petid;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getbreed() {
+		return breed;
+	}
+	public void setbreed(String breed) {
+		this.breed = breed;
+	}
+	public String getgender() {
+		return gender;
+	}
+	public void setgender(String gender) {
+		this.gender = gender;
+	}
+	public float getPrice() {
+		return price;
+	}
+	public void setPrice(float price) {
+		this.price = price;
+	}
+	@Override
+	public String toString() {
+		return String.format("%-10d%-30s%-20s%-20s%-10.2f",this.petid,this.name,this.gender,this.breed,this.price);
+	}
+	@Override
+	public int compareTo(Pet o) {
+			return this.petid-o.petid;
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(petid);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pet other = (Pet) obj;
+		return petid == other.petid;
+	}
+	
+//	@Override
+//	public boolean equals(Object obj) {
+//		// TODO Auto-generated method stub
+//		return super.equals(obj);
+//	}
+//	@Override
+//	public boolean equals(Object obj) {
+//		if( obj != null ) {
+//			Book other = (Book) obj;
+//			if( this.petid == other.petid )
+//				return true;
+//		}
+//		return false;
+//	}
+	
+}

@@ -1,0 +1,132 @@
+package org.example.main;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Scanner;
+import org.example.domain.Pet;
+import org.example.domain.Sort;
+import org.example.test.BookTest;
+import org.example.domain.ArrayListOp;
+import org.example.utils.*;
+
+public class Program {
+
+	static Scanner sc=new Scanner(System.in);
+	private static Pet[] getArray() {
+		System.out.print("How many pets you want to store : ");
+		int n=sc.nextInt();
+		Pet[] arr=new Pet[n];
+		System.out.println("Enter below pet details : ");
+		for(int i=0;i<arr.length;i++) {
+			arr[i]=new Pet();
+			System.out.println("Enter Pet Species: ");
+			sc.nextLine();
+			arr[i].setSpecies(sc.nextLine());
+			System.out.println("Enter Breed of pet : ");
+			arr[i].setBreed(sc.nextLine());
+			System.out.println("Enter Gender of pet: ");
+			arr[i].setGender(sc.nextLine());
+			System.out.println("Enter Book ID: ");
+			arr[i].setBookid(sc.nextInt());
+			System.out.println("Enter Book ID: ");
+			arr[i].setBookid(sc.nextInt());
+			System.out.println("Enter Book Price: ");
+			arr[i].setPrice(sc.nextFloat());
+		}
+		return arr;
+	}
+	
+	private static void getBookId(int[] bookId) {
+		if( bookId != null ) {
+			System.out.print("Enter book id	:	");
+			bookId[ 0 ] = sc.nextInt();
+		}
+	}
+	
+	private static void printRecord(Pet book) {
+		if( book != null )
+			System.out.println( book.toString());
+		else
+			System.out.println("Book not found.");
+	}
+	
+	static ArrayListOp menuList() {
+		System.out.println("1. Add Books");
+		System.out.println("2. Find Book");
+		System.out.println("3. Remove Book");
+		System.out.println("4. Sort");
+		System.out.println("5. Exit");
+		return ArrayListOp.values()[sc.nextInt()-1];
+	}
+	
+	private static Sort subMenuList() {
+		System.out.println("1. By ID");
+		System.out.println("2. By Name");
+		System.out.println("3. By Auther");
+		System.out.println("4. By Publisher");
+		System.out.println("5. By Price");
+		System.out.println("6.Exit");
+		return Sort.values()[sc.nextInt()-1];
+	}
+	public static void main(String[] args) {
+		ArrayListOp ch;
+		Sort s;
+		 int bId[]=new int[1];
+		BookTest test=new BookTest();
+		test.setBookList(new ArrayList<>());
+		 
+		 
+		while((ch=Program.menuList())!=ArrayListOp.EXIT) {
+		
+			switch (ch) {
+			//Add book
+			case ADD_BOOKS:Pet[] book=Program.getArray(); 
+												test.addBooks(book);
+				break;
+			//Find book
+			case FIND_BOOK:      Program.getBookId( bId );
+													Pet value;
+													try {
+														value = test.findBook( bId[ 0 ] );
+														Program.printRecord(value);
+													} catch (BookListNullException e) {
+														e.printStackTrace();
+													}
+													
+				break;
+			
+			case REMOVE_BOOK:         Program.getBookId( bId );
+																boolean status=test.removeBook(bId[0]);
+																System.out.println(status);
+				break;
+			case SORT:
+				while((s=Program.subMenuList())!=Sort.EXIT) {
+					Comparator<Pet> comparator=null;
+					switch (s) {
+					case BY_ID: comparator=new IdComparator();						
+						break;
+					case BY_NAME: comparator=new NameComparator();
+					break;
+					case BY_AUTHER:comparator=new AuthorComparator();
+					break;
+					case BY_PUBLISHER:comparator=new PublisherComparator();
+					break;
+					case BY_PRICE:comparator=new PriceComparator();
+					break;
+					default:
+						break;
+					}
+					test.printBooks(comparator);
+				}
+			default:
+				break;
+			}
+		}
+	
+		
+	}
+	
+	
+	
+}
+

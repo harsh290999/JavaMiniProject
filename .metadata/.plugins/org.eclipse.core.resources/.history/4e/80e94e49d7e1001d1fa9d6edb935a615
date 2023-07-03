@@ -1,0 +1,67 @@
+package org.example.test;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+import org.example.domain.Book;
+import org.example.utils.BookListNullException;
+
+public class BookTest {
+	List<Book> booklist;
+	
+	public void setBookList(ArrayList<Book> book) {
+		if(book!=null)
+			this.booklist=book;
+	}
+
+	public void printBooks(Comparator<Book> comparator) {
+		if(this.booklist!=null) {
+			this.booklist.sort(comparator);
+			this.booklist.forEach(System.out::println);
+//			while( booklist.iterator().hasNext()) 
+//				System.out.println(booklist.iterator().toString());
+			
+		}
+	}
+
+	public void addBooks(Book[] book) {
+//		booklist=new ArrayList<>();
+		if(this.booklist!=null) {
+			if(book!=null) {
+				for(int i=0;i<book.length;i++)
+					this.booklist.add(book[i]);	
+			}
+		}
+	}
+
+	public Book findBook(int b) throws BookListNullException {
+	if(this.booklist==null)
+		throw new BookListNullException("BookList is null");
+//		if (this.booklist != null)
+		{
+			Book key=new Book();
+			key.setBookid(b);
+				if(this.booklist.contains(key)) {
+					int index=this.booklist.indexOf(key);
+					Book book=this.booklist.get(index);
+					return book;
+			}
+		}
+		return null;
+	}
+
+	public boolean removeBook(int i) {
+		if (this.booklist != null) {
+			Book key=new Book();
+			key.setBookid(i);
+				if(this.booklist.contains(key)) {
+					int index=this.booklist.indexOf(key);
+					this.booklist.remove(index);
+					return true;
+			}
+		}
+		return false;
+	}
+}
+
